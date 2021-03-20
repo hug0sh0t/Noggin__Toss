@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<br><br><br>
+<div class="authforms">
+{% if messages %}
+<div id="message_container" class="container alert alert-primary fade show" role="alert">
+<ul class="messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      <center>{{ message }}</center>
+    </span>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class='jumbotron mt-5 shadow-lg p-3 bg-white rounded col-15 col-md-5 mx-auto'>
+  <center>
+    <img src="/media/badges/star.png" style="width:270px;height:270px"/>
+    
+            
+    <form style="width:400px;color:#f26060" method='POST' enctype='multipart/form-data'>
+      {% csrf_token %}
+      {{ form.username|as_crispy_field }}
+      <small style="color:grey"> Letters, digits and These Special Characters @/./+/-/_ are encouraged.</small>
+      {{ form.email|as_crispy_field }}
+      <small class="mb-5" style="width:400px;color:grey"> The Need for your email is to help recover
+        any of Your Lost information, or to notify you of security risks to your account
+      </small><br><br><br><br>
+      {{ form.password1|as_crispy_field }}
+      {{ form.password2|as_crispy_field }}
+      <small class="mb-5" style="width:400px;color:grey">   
+      Your password can't be too similar to your other personal information,
+      contain at least 8 characters.
+      and can't be entirely numeric.<br>
+      Authenticity helps with security .
+            
+      </small><br><br><br><br>
+      
+
+      <button type='submit' style="color: #ffad99;border-radius:10%" class='shadow-lg mb-5 btn btn-outline-light btn-lg btn-block'>{% if btn_label %}{{btn_label}}
+        {% else %}Save{% endif %}</button>
+    </form>
+
+
+    {% if description %}
+    <h6 style="color:grey" class='mb-4 hide small'>{{ description }}</h6>
+    {% endif %}
+  </center><br><br>
+</div>
+</div>
+{% endblock content %}
+
+
+

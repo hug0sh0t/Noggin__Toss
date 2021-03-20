@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+<div style="color:black" class="authforms">
+{% if messages %}
+<center><div style='width:700px;color:#cca300' id="message_container" class="mt-4 alert alert-outline-success fade show" role="alert">
+<ul  class="messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      <center>
+        <img src="/media/parking/astroid.png" style="width:58px;height:58px"/>
+        {{ message }}</center>
+    </span>
+    </div>
+    {% endfor %}
+  </ul></center>
+{% endif %}
+
+<div style="background-color:#ecf2f9" class='jumbotron mt-5 shadow-lg p-3 rounded col-8 col-md-5 mx-auto'>
+  <center>
+      <h4>ＮＯＧＧＩＮＴＯＳＳ</h4><br>
+    <img src="/media/badges/star.png" style="width:100px;height:100px" alt="mainlogo"/>
+    <br><br><br>
+    <div class="myDIV">{% include "components/form.html" with form=form btn_label=btn_label %}</div>
+    <h6><a href='/register' style="text-decoration:none;color:black"> Create Account
+      </a></h6>
+    <small><a href='/reset_password/' style="text-decoration:none;color:grey"> Password Recovery</a></small>
+  </center><br><br>
+</div>
+</div>
+{% endblock content %}
+

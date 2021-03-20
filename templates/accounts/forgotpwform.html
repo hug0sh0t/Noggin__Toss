@@ -1,0 +1,27 @@
+{% load crispy_forms_tags %}
+{% if form %}
+<head>
+ <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+ </head>
+<center style="margin-top:200px;font-family:sans-serif;color:grey">
+<p>
+Please Select an Authentic, and Secure Password
+<br> Please Think About Your Saftey, Cause We Do
+</p><hr>
+<form style="width:400px" method="post">
+  {% csrf_token %}
+  {{form | crispy}}
+  <input value="Confirm Selection" style="border:none" class="mt-4 btn btn-outline-danger" type="submit" name="Send email"/>
+
+</form>
+</center>
+{% else %}
+<center style="font-family:sans-serif"><h1 style="margin-top:400px;color:red">This Form Has Expired, You May
+    Delete This Email<br> You are now Being Sent Back to NOGGINTOSS
+     </h1><br>-<strong style="color:grey"> AdminStingray</strong></center><hr>
+     <meta http-equiv = "refresh" content = "4; url = /" />
+
+{% endif %}
+

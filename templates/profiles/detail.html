@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+{% block head_title %}
+  {{request.user}}'s Base Profile 
+{% endblock head_title%}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if request.user.is_authenticated %}
+<br><br><br>
+<div style="color:#000000" class="globalFadeIn">
+
+<span class="card bg-white mt-5 mr-5 shadow-lg" style="float:right;border:1px solid #c8c8c8;width:550px">
+  <center>
+      <br><img class=" mb-3" src="/media/react/upload.png"
+      style="width:30px;height:30px" />
+
+      {% if salute_amount == '1' %}
+        <span >{{salute_amount}} Salute Earned</span>
+      {% else %}
+        <span >{{salute_amount}} Salutes Earned</span>
+      {% endif %}<br> 
+ 
+      {% if cmt_interact_salute == '1' %}
+        <span class="ml-3"><br>
+        <img class="mr-2" src="/media/parking/team.png" style="width:40px;height:40px" />
+        {{cmt_interact_salute}}  Discussion Upvote </span>
+      {% else %}
+        <span class="ml-3"><br>
+        <img class="mr-2" src="/media/parking/team.png" style="width:40px;height:40px" />
+        {{cmt_interact_salute}}  Discussion Upvotes </span>
+      {% endif %}
+    
+        <hr style="width:300px">
+        <small style="font-size:10px"> Active {{profile.user.last_login|timesince}} Ago</small><br>
+        <small style="font-size:10px"> Joined {{profile.user.date_joined|timesince}} Ago</small>
+  </center> <br>
+ 
+
+{% if username|cut:" " == request.user|cut:" " %}
+<ul style="width:400px;color:grey;float:right" class="mb-5 container rounded bg-white">
+    <li class="list-group-item">your username is
+    <img src="/media/react/bottt.png" style="opacity:.4;width:40px;height:40px" />
+      {{user.username}}</li>
+
+    <a  href="/profiles/edit" style="color:grey;text-decoration:none" >
+      <li class="remodH list-group-item">Remodel profile
+        {% if request.user.email == '' or request.user.email == ' ' %}
+      <img src="/media/parking/badtag.png" class="wiggle" style="width:55px;height:55px" />
+        {% else %}
+      <img src="/media/parking/gear.png" style="width:30px;height:30px" />
+        {% endif %}
+      </li></a>
+
+       <a href="/global" style="color:grey;text-decoration:none">
+       <li class="remodH list-group-item" >
+       Top Global
+       </li></a>
+      
+       <a href="/vault" style="color:white;text-decoration:none">
+       <li class="remodW list-group-item bg-dark" >
+         Your Favorites <img class="" src="/media/parking/top.png" style="width:30px;height:30px" />
+        <strong style="color:#353A40">enter ? </strong>
+       </li></a>
+       <a href="/pwchange/" style="color:white;text-decoration:none">
+       <li class="remodW list-group-item bg-dark" >
+         Change Password <img class="" src="/media/parking/locked.png" style="width:30px;height:30px" />
+        <strong style="color:#353A40">proceed ? </strong>
+       </li></a>
+        <a href="/logout" style="color:white;text-decoration:none">
+       <li class="remodW list-group-item bg-dark">
+         <small style="font-size:9px">Loggout</small><strong style="color:#353A40"> »﹞ </strong>
+       </li></a>
+</ul>
+{% endif %}
+
+
+
+  </span>
+
+
+<!-- BADGE SYSTEM -->
+
+
+{% if username|cut:" " == request.user|cut:" " %}
+<div class="ranking pointer container rounded container ml-5" 
+  data-href='/api/rank/{{profile.user_id}}' 
+  style="position:absolute;float:left;width:700px">
+  <div class="mt-5  mb-5 "><!-- connected to the LAST Div -->
+  {% else %}
+  <div class="ranking pointer container jumbotron bg-white ml-5 shadow-lg" 
+  data-href='/api/rank/{{profile.user_id}}' 
+  style="float:left;width:550px;border: solid 1px #c8c8c8">
+    {% endif %}
+
+
+<h6 class="ml-4 border-bottom" 
+    style="width:100px;color:grey">Nobilis Status</h6>
+<!--ARES-->
+
+<h6 class='rankpanel' style="float:right;opacity:0.0">
+  <img src="/media/parking/ggkk.png" 
+  style='width:55px;height:55px'/>updated
+  </h6>
+
+<!--OMNI-->
+ {% if profile.FavoredBadge <= 80 %}
+
+ <span style="color:white;background-color:#33568B" class="alert container"> 
+  <img src="/media/parking/float.png" style="width:90px;height:90px" />
+  Rocket Rank: rook
+ </span>
+
+  {% elif profile.FavoredBadge > 80 and profile.FavoredBadge <= 100 %}
+
+  <span class="container alert" style="color:white;background-color:#800080">
+  <img src="/media/parking/float.png" style="width:90px;height:90px" />
+  Rocket Rank: Duke 
+  </span>
+
+  {% elif profile.FavoredBadge > 100 and profile.FavoredBadge < 150 %}
+
+  <span class="container alert" style="background-color:red;color:white"> 
+  <img src="/media/parking/float.png" style="width:90px;height:90px" />
+  Rocket Rank: Chief
+  </span>
+
+  {% elif profile.FavoredBadge >= 150 %}
+
+  <span style="background-color:black;color:gold" class="alert alert-dark container">  
+  <img src="/media/parking/float.png" style="width:90px;height:90px" />
+  Rocket Rank: ELITE
+  </span>
+
+  {% endif %}
+
+<br>
+
+{% if username|cut:" " == request.user|cut:" " %}
+
+
+  {% if profile.impactBadge <= 100 %}
+
+  <span class="container alert" style="opacity:.8;color:white;background-color:#33568B"> 
+  <img src="/media/badges/blood.png" style="width:80px;height:80px" />
+  Ares Rank: rook
+  </span>
+
+  {% elif profile.impactBadge > 100 and profile.impactBadge <= 130 %}
+
+  <span class="container alert" style="opacity:.8;background-color:purple;color:white"> 
+  <img src="/media/badges/blood.png" style="width:90px;height:90px" />
+  Ares Rank: Duke
+  </span>
+
+  {% elif profile.impactBadge > 130 and profile.impactBadge < 150 %}
+
+  <span class="container alert" style="opacity:.8;background-color:red;color:white"> 
+  <img src="/media/badges/blood.png" style="width:90px;height:90px" />
+  Ares Rank: Chief
+  </span>
+
+  {% elif profile.impactBadge >= 150 %}
+
+  <span class="container alert" style="opacity:.8;background-color:black;color:#e6b800"> 
+  <img src="/media/badges/blood.png" style="width:80px;height:80px" />
+  Ares Rank: MASTER
+  </span>
+
+  {% endif %}
+  <br>
+<!--HERMES-->
+  {% if profile.hermesBadge <= 40 %}
+  <span class="container alert" style="opacity:.8;color:white;background-color:#33568B"> 
+  <img src="/media/badges/water.png" style="width:90px;height:90px" />
+  Hermes Rank: rook
+  </span>
+
+  {% elif profile.hermesBadge > 40 and profile.hermesBadge <= 80 %}
+
+  <span class="container alert" style="opacity:.8;background-color:purple;color:white"> 
+  <img src="/media/badges/water.png" style="width:90px;height:90px" />
+  Hermes Rank: Duke
+  </span>
+
+  {% elif profile.hermesBadge > 80 and profile.hermesBadge < 140 %}
+
+  <span class="container alert" style="opacity:.8;background-color:red"> 
+  <img src="/media/badges/water.png" style="width:90px;height:90px" />
+  Hermes Rank: Chief
+  </span>
+
+  {% elif profile.hermesBadge >= 140 %}
+
+  <span class="container alert" style="opacity:.8;background-color:black;color:#e6b800">  
+  <img src="/media/badges/water.png" style="width:90px;height:90px" />
+  Hermes Rank: MASTER
+  </span>
+
+  {% endif %}
+  <br>
+
+<!--HERA-->
+  
+  {% if profile.createBadge <= 40 %}
+
+  <span class="container alert" style="opacity:.8;color:white;background-color:#33568B">
+  <img src="/media/badges/grass.png" style="width:90px;height:90px" />
+  Hera Rank: rook
+  </span>
+
+  {% elif profile.createBadge > 40 and profile.createBadge <= 80 %}
+  <span class="container alert" style="opacity:.8;background-color:#800080">
+  <img src="/media/badges/grass.png" style="width:90px;height:90px" />
+  Hera Rank: Duke
+  </span>
+  {% elif profile.createBadge > 80 and profile.createBadge < 140 %}
+  <span class="container alert" style="opacity:.8;color:white;background-color:red">
+  <img src="/media/badges/grass.png" style="width:90px;height:90px" />
+  Hera Rank: Chief
+  </span>
+  {% elif profile.createBadge >= 140 %}
+  <span class="container alert" style="opacity:.8;color:#e6b800;background-color:black"> 
+  <img src="/media/badges/grass.png" style="width:90px;height:90px" />
+  Hera Rank: MASTER
+  </span>
+  {% endif %}
+  <br>
+
+
+
+  <br><br>
+  <h6 style="color:grey">Keep Track</h6>
+
+
+<br><br>
+<img src="/media/parking/float.png" style="width:90px;height:90px"/><br>
+{% if profile.FavoredBadge <= 80 %}
+<span class="badge badge-pill" style="color:white;background-color:#33568B">rook</span>
+  {% elif profile.FavoredBadge > 80 and profile.FavoredBadge <= 100 %}
+  <span class="badge badge-pill" style="color:white;background-color:purple">Duke</span>
+  {% elif profile.FavoredBadge > 100 and profile.FavoredBadge < 150 %}
+  <span class="badge badge-pill badge-danger">Chief {{profile.FavoredBadge}}</span>
+  {% elif profile.FavoredBadge > 150 %}
+  <span class="badge badge-lg" style="color:white;background-color:gold">ELITE</span>
+  {% endif %}
+ <br><h6> {{t_ratio}} % towards your next Badge <br><br>
+{% if profile.FavoredBadge == 1 %}   
+  {{profile.FavoredBadge}} point collected from Interactions
+{% else %}
+{{profile.FavoredBadge}} points collected from Interactions
+{% endif %}
+</h6><br>
+
+{% endif %}
+
+
+
+{% if t_ratio >= 100 %}
+<div style="height:40px;border-radius:8%" class="cBar progress mt-2">
+  <div class="progress-bar-striped progress-bar-animated bg-warning" 
+       role="progressbar" 
+       style="width: {{t_ratio}}%"  
+       aria-valuenow="{{profile.FavoredBadge}}"
+       aria-valuemin="0" aria-valuemax="150"></div>
+</div>
+{% else %}
+<div style="height:40px;border-radius:8%"class="cBar progress mt-2">
+  <div class="progress-bar-striped progress-bar-animated" 
+       role="progressbar" 
+       style="opacity:.7;width: {{t_ratio}}%;background-color:#08FFE2"  
+       aria-valuenow="{{profile.FavoredBadge}}"
+       aria-valuemin="0" aria-valuemax="150"></div>
+</div>
+
+{% endif %}
+{% if not username|cut:" " == request.user|cut:" " %}
+<small style="color:crimson">Earned: {{profile.FavoredBadge}} points</small>
+{% endif %}
+
+
+  </div>
+</div>
+
+<!-- BADGE SYSTEM -->
+
+
+  
+{% if username|cut:" " == request.user|cut:" " %}
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+{%endif%}
+{% if not username|cut:" " == request.user|cut:" " %}
+<div class='container jumbotron bg-white shadow-lg' style='width:1200px'>
+          <div style="color: black" 
+               id="skyrocket"
+               class="tossiteh-profile-badge " 
+            data-username="{{ username }}"></div><br>
+            </div>
+          </div>
+        </div>
+{%endif%}
+
+
+
+
+{% if username|cut:" " == request.user|cut:" " %}
+<div class='jumbotron bg-white' style='width:100%'>
+    <div style="color: black" 
+         class="tossiteh-profile-badge " 
+         data-username="{{ username }}"></div></div>
+{% endif %}
+<!---->
+
+
+{% if not username|cut:" " == request.user|cut:" " %}
+<div 
+  style="border:1px solid #f3f3f3"
+  class='container col-md-10 p-5 bg-white rounded ' id='tossiteh'
+  data-username="{{ username }}"
+  data-can-noggin="false">
+</div>
+{% endif %}
+
+{% if not username|cut:" " == request.user|cut:" " %}
+<a class="mr-5 mb-5" href="#skyrocket"
+  style="text-decoration:none;color:grey;position:fixed;z-index:1000;bottom:0;right:0">UP</a>
+{% endif %}
+<!--createpanel-->
+
+
+
+<!---->
+   {% endif %}
+{% endblock content %}
+

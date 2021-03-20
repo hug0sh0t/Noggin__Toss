@@ -1,0 +1,32 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div style="margin-top: 150px"></div>
+ 
+
+
+  {% for profile in gui %}
+  <div style="width:900px" 
+    class="jumbotron container p-1 bg-white rounded"><div class='nav-link'>
+    
+       <h4><a style="text-decoration: none" href="/profiles/{{profile.user}}">
+         <img class="shadow-lg" style='width:70px;height:70px;border-radius:50%;' src='/media/{{ profile.avatar }}' alt=''/>
+       </a>
+      <img style='width:40px;height:40px;transform:rotate(40deg)'
+      src='/media/parking/tags.png'/>
+      <a style='color:#e6b800;text-decoration: none' href='/profiles/{{profile.user}}'>
+        {{ profile.user }}</h4></a>
+      </a>
+       
+       <small style="width:500px" class="container small">{{profile.bio}}</small>
+       <br><br>
+     </div></div>
+    {% empty %}
+    <center><h5>NO FOLLOWERS YET</h5></center>
+  {% endfor %}
+  
+{% endblock content %}
+

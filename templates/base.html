@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="ie-edge" http-equiv="x-ua-compatible">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" >
+    <meta name="theme-color" content="#000000">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+    {% include 'react/css.html' %}
+    <title>{% block head_title %}{% endblock head_title%} </title>
+    <link rel="shortcut icon" type="image/png" href="/media/react/toss.png">
+    
+    
+  </head>
+  <body style="background-color:#F9F9F9">
+    <noscript>Please Enable Javascript to properly enjoy NogginToss</noscript>
+    {% include "components/navbar.html" %}
+    <div style='color:black;font-family:sans-serif' class=''>
+    {% block content %}
+    {% endblock content %}
+    </div>
+    {% include 'react/base_embed.html' %}
+    {% include 'react/js.html' %}
+  <center class="mb-5" style="margin-top:100px;color:grey"><small>©NogginToss 2020 <br><a
+        style="text-decoration:none;color:grey" href='/coc'>
+    Code Of Conduct </a> | <a style="text-decoration:none;color:grey" href='/privacypolicy'> Privacy Policy</a> | 
+    <a style="text-decoration:none;color:grey" href='/tos'> Terms of Service</a>
+    </small></center>
+<script>
+  
+   function popUp() {
+    var x = document.getElementById("popper");
+    if (x.style.display === "none") {
+      $(".rmvButt").fadeIn(300)
+    } else {
+      x.style.display = "none";
+    }
+  }
+  
+  function deactivate() {
+    var x = document.getElementById("DePopper");
+    if (x.style.display === "none") {
+      $(".rmvButt").fadeIn(300)
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+ // vault toggle 
+  function favPop() {
+    var x = document.getElementById("sPopper");
+    var y = document.getElementById("cPopper");
+    this_ = $(this)
+    if (x.style.display === "block") {
+      $(".querytoggle").attr("style", "width:150px;height:150px;transform:rotate(135deg)")
+      $(".nFade").fadeOut(400)
+      x.style.display = "none";
+      $(".cFade").fadeIn(400)
+      y.style.display = "block";
+
+    } else if (y.style.display === "block"){
+      $(".querytoggle").attr("style", "width:150px;height:150px;transform:rotate(315deg)")
+      $(".cFade").fadeOut(400)
+      y.style.display = "none";
+      $(".nFade").fadeIn(400)
+      x.style.display = "block";
+    }
+  }
+
+
+// search toggle
+  function togglePop() {
+    var x = document.getElementById("sPopper");
+    this_ = $(this)
+    if (x.style.display === "none") {
+      $(".querytoggle").attr("style", "width:100px;height:100px;transform:rotate(315deg)")
+      $(".nogFade").fadeIn(200)
+      x.style.display = "block";
+      $(".comFade").fadeOut(200)
+      $(".comFade").attr("style", "display:none")
+
+    } else if (x.style.display === "block"){
+      $(".querytoggle").attr("style", "width:100px;height:100px;transform:rotate(135deg)")
+      $(".nogFade").fadeOut(200)
+      x.style.display = "none";
+      $(".comFade").fadeIn(200)
+      $(".comFade").attr("style", "display:block")
+    }
+  }
+
+
+// notification toggle
+  function notificationPop() {
+    var x = document.getElementById("notifications_toggle");
+    this_ = $(this)
+    if (x.style.display === "none") {
+      $(".querytoggle").attr("style", "width:100px;height:100px;transform:rotate(405deg)")
+      $(".notifyFade").fadeIn(200)
+      x.style.display = "block";
+      $(".nogFade").fadeOut(200)
+      $(".nogFade").attr("style", "display:none")
+
+    } else if (x.style.display === "block"){
+      $(".querytoggle").attr("style", "width:100px;height:100px;transform:rotate(225deg)")
+      $(".notifyFade").fadeOut(200)
+      x.style.display = "none";
+      $(".nogFade").fadeIn(200)
+      $(".nogFade").attr("style", "display:block")
+    }
+  }
+
+
+  $(".remodH").mouseenter(function(e){
+    this_ = $(this)
+    var unit = this_.attr("class")
+    this_.attr("class", "remodH list-group-item bg-dark")
+  }).mouseleave(function(e){
+    this_ = $(this)
+    var unit = this_.attr("class")
+    this_.attr("class", "remodH list-group-item")
+  
+  })   
+
+  $(".remodW").mouseenter(function(e){
+    this_ = $(this)
+    var unit = this_.attr("class")
+    this_.attr("class", "remodW list-group-item")
+  }).mouseleave(function(e){
+    this_ = $(this)
+    var unit = this_.attr("class")
+    this_.attr("class", "remodW list-group-item bg-dark")
+  
+  })   
+
+
+
+    $(".notifydel").click(function(e){
+      e.preventDefault()
+      var this_ = $(this)
+      var likeUrl = this_.attr("data-href")
+      var nid = parseInt(this_.attr("data-nid"))
+      var dotnidPass = "."+nid
+      if (likeUrl) {
+           $("")
+        $.ajax({
+              url: likeUrl,
+              method: "GET",
+              data: {},
+              success: function(data){
+                  $(dotnidPass).fadeOut(300)
+                  
+
+              }, error: function(error){
+                console.log(error)
+                console.log("error")
+              }
+            })
+        }
+    })
+
+
+     $(".ranking").click(function(e){
+      e.preventDefault()
+      var this_ = $(this)
+      var likeUrl = this_.attr("data-href")
+  
+      if (likeUrl) {
+           $("")
+        $.ajax({
+              url: likeUrl,
+              method: "GET",
+              data: {},
+          success: function(data){
+                $(".rankpanel").attr("style", "color:grey;float:right;opacity:1.0")
+                $(".rankpanel").fadeIn(0)
+                $(".rankpanel").fadeOut(1500)
+
+              }, error: function(error){
+                console.log(error)
+                console.log("error")
+              }
+            })
+        }
+    })
+
+
+
+
+    $(".cmtDeleter").click(function(e){
+      e.preventDefault()
+      var this_ = $(this)
+      var likeUrl = this_.attr("data-href")
+      var cid = parseInt(this_.attr("data-cid"))
+      var dotcidPass = "."+cid
+      if (likeUrl) {
+           $("")
+        $.ajax({
+              url: likeUrl,
+              method: "GET",
+              data: {},
+              success: function(data){
+                  $(dotcidPass).fadeOut(1000)
+                  this_.fadeOut(200)
+                  
+
+              }, error: function(error){
+                console.log(error)
+                console.log("error")
+              }
+            })
+        }
+    })
+
+
+
+      $(".globalFadeIn").fadeOut(0)
+      $(".globalFadeIn").fadeIn(700)
+
+      $(".longFade").fadeOut(0)
+      $(".longFade").fadeIn(1200)
+      
+      $(".authforms").fadeOut(0)
+      $(".authforms").fadeIn(400)
+
+
+  $(document).ready(function(){
+    function updateText(btn, newCount){
+      
+      btn.text(newCount + " ")
+    }
+  
+ 
+    $(".like-btn").click(function(e){
+      e.preventDefault()
+        // Change src attribute of image
+      var this_ = $(this)
+      var likeUrl = this_.attr("data-href")
+      var likeCount = parseInt(this_.attr("data-likes")) | parseInt(this_.attr("data-likes"))
+      var cidPass = parseInt(this_.attr("data-cidpass"))
+      var finalPass = "."+cidPass
+      var addLike = likeCount + 1
+      var removeLike = likeCount - 1
+      if (likeUrl) {
+        $("")
+        $.ajax({
+              url: likeUrl,
+              method: "GET",
+              data: {},
+              success: function(data){
+                
+                if (data.liked){
+
+                  updateText(this_, data.likescount)
+                  $(finalPass).attr("src","/media/parking/yes.png")
+                  this_.attr("style","color:#f26060;font-weight:bold;text-decoration:none;background:none;border:none;padding:0;box-shadow:none;outline:none")
+
+                } else {
+
+                  updateText(this_, data.likescount)
+                  $(finalPass).attr("src","/media/parking/no.png")
+                  this_.attr("style","color:#bfa904;text-decoration:none;background:none;border:none;padding:0;box-shadow:none;outline:none")
+
+                }
+              
+              }, error: function(error){
+                console.log(error)
+                console.log("error")
+              }
+            })
+      }
+    })
+  })
+
+  </script>
+<script>
+var message_ele = document.getElementById("message_container");
+setTimeout(function(){ 
+  if (message_ele) {
+    message_ele.style.display = "none"; 
+  }
+}, 2500);
+
+$(document).ready(function(){
+  {% block jquery %}{% endblock %}
+})
+
+ </script>
+<style>
+ 
+
+    .asteriskField {
+      display: none;
+    }  
+    @keyframes wiggle {
+      0% { transform: rotate(0deg); }
+      80% { transform: rotate(0deg); }
+      85% { transform: rotate(20deg); }
+      95% { transform: rotate(-20deg); }
+      100% { transform: rotate(0deg); }
+     }
+
+    .wiggle {
+      display: inline-block;
+      animation: wiggle 1.0s infinite;
+    }
+
+    .wiggle:hover {
+      animation: none;
+    }
+
+
+   .speech-bubble {
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    border-radius: 5px;
+    width: 110px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    }
+
+    
+    .zoom {
+      padding: 50px;
+      background-color: green;
+      transition: transform .2s; 
+      height: 80px;
+      margin: 0 auto;
+      transition: 0.5s;
+    }
+    .zoom:hover {
+      transform: scale(1.5); 
+    }
+    
+    .hide {
+      display: block;
+      opacity: 0.01;
+       transition: opacity .25s ease-in-out;
+       -moz-transition: opacity .25s ease-in-out;
+       -webkit-transition: opacity .25s ease-in-out;
+      }
+    
+    .myDIV:hover + .hide {
+      display: block;
+      opacity: 1.0;
+      
+    }
+
+  
+</style>
+
+
+  </body>
+</html>
+

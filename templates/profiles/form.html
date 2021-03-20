@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class='col-10 col-md-4 mx-auto'>
+  <center>
+    <h1 class='mb-5' style='color:#4d9900'>{{ title }}</h1>
+    {% if description %}
+    <h6 class='mb-4' style='color:#b35900'>{{ description }}</h6>
+    {% endif %}
+    {% include "components/form.html" with form=form btn_label=btn_label %}
+  </center>
+</div>
+
+{% endblock content %}
+
+

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block head_title %}
+  Top Noggins 
+{% endblock head_title%}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<br><br><div style='background-image: url("/media/parking/redy.jpg");background-size: cover)'
+  class='jumbotron bg-white rounded'>
+<center><h6 id="skyrocket" class='text-lg' style='color:white'>
+    <img src='\media\badges\star.png' style="width:150px;height:150px" /></h6></center>
+
+
+  <center style='color: white' class='container'>
+  <small>  ＴＯＰ ＧＬＯＢＡＬ<br>
+      <br>ＦＲＯＭ ＯＵＲ ＳＯＬＡＲ ＳＹＳＴＥＭ
+    <br>ＴＨＥ ＨＩＧＨＥＳＴ ＳＡＬＵＴＥＤ ＮＯＧＧＩＮＳ  ＲＥＡＣＨ ＴＨＥ ＴＯＰ
+  <img style='width:40px;height:40px' src='\media\parking\globe.png'/>
+  </small>
+  </center>
+
+
+</div>
+
+
+<div id='tossiteh' data-can-noggin="false"></div>
+
+
+{% if not username|cut:" " == request.user|cut:" " %}
+<a class="mr-5 mb-5" href="#skyrocket"
+  style="text-decoration:none;color:grey;position:fixed;z-index:1000;bottom:0;right:0">UP</a>
+{% endif %}
+
+
+{% else %}
+<center style="margin-top:200px">You Are Not A Member, if You wish to See Other Noggins Please Visit
+the Lobby</center>
+{% endif %}
+{% endblock content %}

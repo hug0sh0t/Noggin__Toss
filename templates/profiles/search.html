@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="globalFadeIn">
+<div data-username={{username}}><br><br><br>
+<center class='mb-5'>
+
+  <h5 style="color:black;float:left" class="mt-5 ml-5">
+     you searched for {{query}} ...
+    <button class="btn btn-outline-light ml-5" 
+      style="color:#e85a66;box-shadow:none;outline:none;border:none" onclick="togglePop()">
+      noggins
+    <img class="querytoggle" src="/media/parking/antate.png"
+    style="width:100px;height:100px;transform:rotate(315deg)" />
+    members
+    </button>
+  </h5><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+
+   {% for f in filter.qs %}
+     {% for u in userqs %}
+       {% if u.id == f.user_id and not u.username == 'edit' %}
+ <div class="comFade container" style="display:none">
+  <center>
+  <div style="width:700px" 
+    class="col-md-10 card container p-1 mb-5 bg-white rounded">
+    <a style='color:#e6b800' class='nav-link' href='/profiles/{{u.username}}'>
+    <h3><h4><img style='width:40px;height:40px;transform:rotate(40deg)'
+      src='/media/parking/tags.png'/>{{u.username}}
+    </h3>
+    </h4>
+    <img style="width:80px;height:80px;border-radius:50%" class="mb-2" src="/media/{{f.avatar}}"/>
+    <small style="color:black">{{u.first_name}} {{u.last_name}}</small>
+     <h6 style='color:#e6b800'>FOLLOWERS {{f.followers.count}}</h6>
+
+     <h6 style='color:#e6b800'>FOLLOWING {{u.following.count}}</h6>
+
+  {% if f.FavoredBadge <= 80 %}
+    <span style="color:white;background-color:#33568B" class="alert"> 
+      <img style="width:50px;height:50px" src="/media/badges/star.png" />
+      ROOK</span>
+
+  {% elif f.FavoredBadge > 80 and f.FavoredBadge <= 100 %}
+    <span class="alert" style="background-color:purple;color:white">
+      <img style="width:50px;height:50px" src="/media/badges/star.png" />
+      DUKE</span>
+
+  {% elif f.FavoredBadge > 100 and f.FavoredBadge < 150 %}
+    <span class="alert alert-danger" style="color:white">
+       <img style="width:50px;height:50px" src="/media/badges/star.png" />
+     CHIEF</span>
+  
+  {% elif f.FavoredBadge >= 150 %}
+    <span class="alert" style="background-color:black;color:puple">
+       <img style="width:50px;height:50px" src="/media/badges/star.png" />
+     ELITE</span>
+  
+  {% endif %}
+   <center style="width:400px;color:grey" class="mt-2 container">
+     <small>{{f.bio}}</small>
+    </center></a>
+     <div class='container mt-5' style='width:600px'>
+     </div></center></div>
+  {% endif %}
+      {% endfor %}
+           {% empty %}
+    <center>
+      <small style="color:grey"> No Members Match That Data</h6></center>
+  </div>
+  {% endfor %}
+
+
+
+  
+  <center id="sPopper" 
+  data-toggle="popover" 
+  data-trigger="focus" 
+  class="nogFade jumbotron jumbotron-fluid bg-white" style="display:block;color:black">
+
+  {% for nogs in nogfilter.qs %} 
+
+  {% for p in profiles %}
+    {% if p.user == nogs.user %}
+
+
+    <a href="/profiles/{{nogs.user}}" style="text-decoration:none"><img src="/media/{{p.avatar}}" style="width:90px;height:90px;border-radius:50%" /></a>
+    {% endif %}
+  {% endfor %}
+
+  {{nogs.user}} <br><br>
+  <a href="/{{nogs.id}}" style="color:black;text-decoration:none">
+    {{nogs.likes.count}} Salutes<img src="/media/parking/cckk.png" style="width:50px;height:50px"/>
+  {{nogs.comments.count}} Comments<img src="/media/parking/comment.png" style="width:50px;height:50px"/>
+  Views {{nogs.eyeball_count.count}} <br><br>
+    <h6 style="width:700px">{{nogs.content | linebreaks}}</h6></a>
+  {% if nogs.image %}
+  <a href="/{{nogs.id}}" style="text-decoration:none">
+    <img src="/media/{{nogs.image}}" class="rounded" style="width:540px;height:auto"/></a>
+
+  {% elif nogs.video %}
+  <a href="/{{nogs.id}}" style="text-decoration:none">
+    <video src="/media/{{nogs.video}}" autoplay muted style="width:340px;height:240px"></video></a>
+  {% endif %}
+  <hr style="width:750px">
+  <br><br>
+  <br><br>
+  <br><br>
+   {% empty %}
+    <center>
+    <small style="color:grey"> No Noggins Match That Data</small></center>
+    </div>
+
+  {% endfor %}
+<center>
+
+
+  </div>
+</div>
+
+{% endblock content %}

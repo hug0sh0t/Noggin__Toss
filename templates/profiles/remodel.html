@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block head_title %}
+  Remodeling / NogginToss
+{% endblock head_title%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br>
+<div style="color:#0099cc">
+<div class='mt-5 col-3 col-md-7 mx-auto jumbotron shadow-lg p-3 bg-white rounded'>
+  <div>
+    <img style='width:90px;height:90px' src="/media/parking/remod.png">
+      
+{% if messages %}
+<br><br><center><div style='width:550px' id="message_container" class="alert alert-danger fade show" role="alert">
+<ul  class="messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      <center>{{ message }}</center>
+    </span>
+    </div>
+    {% endfor %}
+  </ul></center>
+{% endif %}
+
+
+
+    {% if description %}
+    <h6 class='mb-4' style='color:#b35900'>{{ description }}</h6>
+    {% endif %}
+
+
+  <center>
+    <form style="width:500px" method='POST' enctype='multipart/form-data'>
+  {% csrf_token %}
+  
+ <h6>( If you forget your password outside of NogginToss,<br> We Use Your Email To Help
+   you Recover Information )<br><br>
+   {{form.email|as_crispy_field}}</h6>
+    <h6>first name<br>{{form.first_name|as_crispy_field}}</h6>
+    <h6>last name<br>{{form.last_name|as_crispy_field}}</h6>
+    <h6>location<br>{{form.location|as_crispy_field}}</h6>
+  <h6>profile avatar<br>
+  
+    {{form.avatar|as_crispy_field}}
+{% for user in users %}
+<h6 for="avatarchange" style="font-family:Trebuchet MS" class="small"><img 
+  class="ml-5 mr-5"
+  style="width:150px;height:150px;border-radius:50%"
+  src="/media/{{user.avatar}}" alt="noggintar"/>
+  <small class="mt-5"><div class="tri-right left-in">this is how others see you</div></small></h6>
+{% endfor %}
+
+  </h6>
+  <h6>tell others about yourself<br>{{form.bio|as_crispy_field}}</h6>
+ 
+ 
+      
+         <button onclick="deactivate()" 
+          type="button" 
+          class=" btn btn-outline-danger btn-sm btn-block mb-4">
+           <small>DEACTIVATE ACCOUNT</small></button>
+ 
+       <center><div id="DePopper"
+           data-toggle="popover"
+           data-trigger="focus"
+           style="background-color:#ffe6e6;color:#b50c00;display:none;z-index:1000;width:500px;height:300px;border-radius:50%;position:absolute"
+           class="mt-5 rmvButt popfade jumbotron rounded">
+           <br>  These Actions are <strong>Irreversible</strong> 
+           <br>  Please note that, once you press Deactivate,
+           <br> any Noggins and Comments made with this Account are also Permanently deleted 
+           <br> To Proceed, please press the Button
+           <br> 
+
+  <a style="text-decoration:none;font-size:10px" 
+    type="button" 
+    class="btn btn-outline-danger small mt-5" 
+     href="/tosser_deactivate/">DEACTIVATE </a><br>
+         </div></center>
+
+
+      
+      
+ <input type='submit' style="font-size:10px" class='myDIV btn btn-success btn-lg btn-block' value='SAVE CHANGES'/>
+ <center style="color:grey" class="mt-5 hide small">You Are Unique, show the World</center>
+    </form></center>
+ </div>
+ <br><br><br><br>
+</div>
+</div>
+{% endblock content %}

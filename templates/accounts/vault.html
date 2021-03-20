@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block content %}
+<br><br>
+<div  id="skyrocket" class="jumbotron bg-dark">
+  <h5 class="mt-2 ml-5" style="color:white">
+    A Collection of Your Favorites
+  <img src="/media/react/book.png" style="width:55px;height:55px"/>
+
+
+<center class="small" style="color:white">
+  Noggins
+<button onclick="favPop()" 
+        class=" wiggle btn btn-outline-dark btn-lg" 
+        style="border:none;box-shadow:none;background:none" 
+        type="button"> 
+  <img class="querytoggle " 
+  src="/media/parking/antate.png" 
+  style="transform:rotate(315deg);width:150px;height:150px" />
+</button>
+  Comments
+
+</h5>
+
+</center>
+
+
+</div>
+
+
+
+
+
+
+  <br><br><br><br>
+<center id="cPopper" 
+  data-toggle="popover" 
+  data-trigger="focus" 
+  class="cFade container" 
+  style="display:none;width:900px">
+  <small style="color:grey">Your Favored Comments During Discussion</small>
+  <hr><br><br>
+  {% for tiger in salutedcomments %}
+    {% for gui in profiles %}
+      {% if tiger.user == gui.user %}
+      <small class="small">
+        <a style="color:grey;text-decoration:none;background:none" href="/profiles/{{gui.user}}" style="text-decorations:none">
+          <img class="mb-5" src="/media/{{gui.avatar}}"
+          style="border-radius:50%;width:100px;height:100px" />{{gui.user}}</a><br>
+      
+      </small>
+      <a style="color:black;text-decoration:none" href="/{{tiger.post_id}}">
+      <img style="width:55px;height:55px" src="/media/parking/com.png" />
+      <strong style="width:100px;color:grey">{{tiger.body}}</strong></a>
+      
+    
+    <hr><br>
+    <br><br>
+      {% endif %}
+
+  
+
+    {% endfor %}
+
+
+     {% empty %}
+  <center><strong>You Have Not Liked Any Comments...</strong></center>
+ 
+
+  {% endfor %}
+</center>
+
+<center id="sPopper" 
+  data-toggle="popover" 
+  data-trigger="focus" 
+  class="nFade" style="display:block">
+    <small style="color:grey">All of Your Saluted Noggins</small>
+  <hr>
+  {% for snake in salutednoggins %}
+    <br><br>
+    <div class="card shadow-lg" style="background-color:#f1f1f1;width:1200px">
+    {% for snakep in profiles %}
+      {% if snake.user == snakep.user %}
+      <br><a style="text-decoration:none;color:#b38f00" href="/profiles/{{snake.user}}">
+      <img src="/media/react/bottt.png" style="width:25px;height:25px"/>
+      <small> {{ snakep.user}}</small><br>
+      <img class="" src="/media/{{snakep.avatar}}" style="width:40px;height:40px;border-radius:50%" />
+      </a>
+      <br>
+      {% endif %}
+    {% endfor %}
+   <h5 class="ml-2" style="color:grey">
+      {{snake.likes.count}} Salutes<img src="/media/react/gold.png" style="width:25px;height:25px"/>
+      {{snake.comments.count}} Comments<img src="/media/parking/team.png"
+      style="width:25px;height:25px"/>
+       Views {{snake.eyeball_count.count}}
+   </h5>
+
+
+  {% if not snake.image and not snake.video %}
+  <a style="text-decoration:none;color:black" href="/{{snake.id}}">
+    <h4 class="container" style="width:800px">{{snake.content}}</h4><br>
+    {% elif snake.image %}
+  <a style="text-decoration:none;color:black" href="/{{snake.id}}">
+    <img class="rounded container  mb-2" src="/media/{{snake.image}}" style="width:510px;height:auto"/>
+    <h5 class="container" style="width:800px">{{snake.content}}</h5></a>
+    <br>
+    {% elif snake.video %}
+  <a style="text-decoration:none;color:black" href="/{{snake.id}}">
+    <video class="container" src="/media/{{snake.video}}" style="width:550px;height:100%" autoplay muted></video><br>
+    <h5 class="container" style="width:800px">{{snake.content}}</h5></a>
+  {% endif %}
+
+
+  </div>
+  {% empty %}
+  <center><strong>You Have No Saluted Noggins...</strong></center>
+{% endfor %}
+</center>
+
+<a class="mr-5 mb-5" href="#skyrocket"
+  style="text-decoration:none;color:grey;position:fixed;z-index:1000;bottom:0;right:0">UP</a>
+
+{% endblock content %}
+

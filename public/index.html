@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" type="image/png" href="{http://104.131.85.52/favicon.ico}"/>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+    crossorigin="anonymous">
+    <title>NOGGIN REACT</title>
+    <style>
+
+     @keyframes wiggle {
+     0% { transform: rotate(0deg); }
+     80% { transform: rotate(0deg); }
+     85% { transform: rotate(15deg); }
+     95% { transform: rotate(-15deg); }
+     100% { transform: rotate(0deg); }
+    }
+
+    .wiggle {
+      display: inline-block;
+      animation: wiggle 1.5s infinite;
+    }
+
+    .wiggle:hover {
+      animation: none;
+    }
+   .speech-bubble {
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    border-radius: 5px;
+    width: 110px;
+    text-align: center;
+    padding: 5px;
+    position: absolute;
+    }
+
+    .speech-bubble .arrow {
+      border-style: solid;
+      position: absolute;
+    }
+ 
+    .top {
+      border-color: #f8f8f8 transparent transparent transparent;
+      width: 0; 
+      height: 0; 
+      border-left: 20px solid transparent;
+      border-bottom: 20px solid #f8f8f8;
+      border-top: 0px;
+      border-right: 20px solid transparent;
+      
+        top: -14px;
+    }
+        
+  
+  
+    .zoom {
+      padding: 50px;
+      background-color: green;
+      transition: transform .2s; 
+      height: 80px;
+      margin: 0 auto;
+      transition: 0.5s;
+    }
+    .zoom:hover {
+      transform: scale(1.5); 
+    }
+       .superzoom {
+      padding: 50px;
+      background-color: green;
+      transition: transform .2s; 
+      height: 80px;
+      margin: 0 auto;
+      transition: 0.5s;
+    }
+    .superzoom:hover {
+      transform: scale(2.5); 
+    }
+    .hide {
+      display: block;
+      opacity: 0.01;
+       transition: opacity .25s ease-in-out;
+       -moz-transition: opacity .25s ease-in-out;
+       -webkit-transition: opacity .25s ease-in-out;
+      }
+    
+    .myDIV:hover + .hide {
+      display: block;
+      opacity: 1.0;
+      
+    }
+ 
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--all in perspective of hugoshots-->
+    <!--nogginCreation-->
+    <center>
+    <div class='tossiteh-profile-badge' data-username="hugoshots"></div>
+    <div  class='mt-2 d-none' id="tossiteh-feed" data-can-noggin="true"></div> 
+    <!--container for noggins-->
+    <div class='d-none' id='noggin-container'></div>
+    <!---->
+    <!--nogginFeed-->
+    <div class='d-none' id="tossiteh" data-username="hugoshots" data-can-noggin="true"></div>
+    </center>
+    <!--
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <script>
+      var path = window.location.pathname
+      var idRegex = /(?<nogginid>\d+)/
+      var match = path.match(idRegex)
+      if (match) {
+        var nogginId = match.groups.nogginid
+        var tossehEl = document.getElementById("tossiteh")
+        tossehEl.className = 'd-none'
+        var nogginEl = "<div class='tossiteh-detail mt-5' data-noggin-id=" + nogginId + " data-class-name='col-6 mx-auto'></div>"
+        var mainContainer = document.getElementById("noggin-container")
+        mainContainer.innerHTML = nogginEl
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{% load crispy_forms_tags %}
+<form style="width:350px;color:#000000" method='POST' enctype='multipart/form-data'>
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button type='submit' 
+    style="color:white;background-color:#204060;border:none;border-radius:5%;width:150px" 
+    class='mb-5 btn btn-outline-light btn-lg'>
+    {% if btn_label %}{{btn_label}}
+    {% else %}Save{% endif %}</buttton>
+</form>

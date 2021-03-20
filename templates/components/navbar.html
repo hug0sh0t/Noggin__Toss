@@ -1,0 +1,90 @@
+{% load notifications_tags %}
+{% load crispy_forms_tags %}
+<nav class="navbar navbar-expand-lg navbar-dark shadow-lg" 
+  style="outline:none;box;shadow:none;background-color: #000000;position: fixed;width: 100%;top: 0;left: 0;z-index:1000">
+  <a class="navbar-brand ml-2 mr-5" href="" style="color: white">
+    <img src="/media/badges/star.png" style="width:65px;height:65px" />
+  </a>
+ 
+  
+  {% if request.user.is_authenticated %}
+    <button class="navbar-toggler" 
+    type="button" 
+    data-toggle="collapse" 
+    data-target="#navbarNavAltMarkup" 
+    aria-controls="navbarNavAltMarkup" 
+    aria-expanded="false" 
+    aria-label="Toggle navigation">
+    <a href="/profiles/{{request.user}}" class="dropdown-item">Profile</a>
+    <a href="/notifications" class="dropdown-item">Collection</a>
+  </button>
+  {% else %}
+  <button class="navbar-toggler" 
+    type="button" 
+    data-toggle="collapse" 
+    data-target="#navbarNavAltMarkup" 
+    aria-controls="navbarNavAltMarkup" 
+    aria-expanded="false" 
+    aria-label="Toggle navigation">
+    <a href="/" class="dropdown-item">Lobby</a>
+    <a href="/login" class="dropdown-item">Loggin</a>
+  </button>
+  {% endif %}
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ">
+      <h5><a class="nav-link ml-5" href="/">
+          <span class="sr-only">(current)</span>🇱🇴🇧🇧🇾</a></h5>
+    </div>
+    
+    <div class="navbar-nav">
+      {% if request.user.is_authenticated %}
+
+      <form method="get" 
+        class="formbox mr-5 shadow-lg" 
+        style="" 
+        rel="search"
+        action="/query/nothing/">
+        <input type="text" 
+               style="position:absolute;right:0;width:500px;border:none;background-color:#313131;outline:none;box-shadow:none" 
+               class="form-control mr-5" 
+               name="valuebox"
+               id="valuebox"
+               placeholder="search the multiverse ⌕"/>
+        <button type="submit" class="d-none" >TESTEST</button>
+      </form>
+
+
+     <li class='mr-5'>
+        <h5><a class="nav-link" href="/profile/vault">🇵🇷🇴🇫🇮🇱🇪</a></h5>
+      </li>
+      <li class='mr-5'>
+        <h5><a class="nav-link" href="/global">🇹🇴🇵🇬🇱🇴🇧🇦🇱</a></h5>
+      </li>
+   
+
+
+<a style="text-decoration:none" href="/notifications/">
+  <img class="zoom" style="width:40px;height:40px;background:none;border:none;outline:none;padding:0" 
+      src="/media/parking/boxer.png" alt=""/>
+{% notifications_unread as unread_count %}
+{% if unread_count %}
+<h6 class="pointer wiggle mr-5 badge badge-lg badge-danger badge-pill" style="color:white">
+ 
+     {{ unread_count }}
+  </h6>
+{% endif %}
+   </a> 
+
+      {% else %}
+      <li class='ml-5 mr-5'>
+        <h5><a class="nav-link" href="/login">🇱🇴🇬🇬🇮🇳</a></h5>
+      </li>
+      </li>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+ <script>
+
+ </script>

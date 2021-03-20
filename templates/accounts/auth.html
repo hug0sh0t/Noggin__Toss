@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br><br>
+<div class="authforms">
+{% if messages %}
+<div id="message_container" class="container alert alert-primary fade show" role="alert">
+<ul class="messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      <center>{{ message }}</center>
+    </span>
+    </div>
+    {% endfor %}
+</ul>
+{% endif %}
+<div class='jumbotron mt-5 shadow-lg p-3 bg-white rounded col-15 col-md-5 mx-auto'>
+  <center>
+    <h2 class='mb-5 mt-5' style="color: grey">{{ title }}
+    </h2><br>
+    <div class="myDIV">{% include "components/form.html" with form=form btn_label=btn_label %}</div>
+    {% if description %}
+    <h6 style="color:red" class='mb-4 hide small'>{{ description }}</h6>
+    {% endif %}
+  </center><br><br>
+</div>
+</div>
+{% endblock content %}
+

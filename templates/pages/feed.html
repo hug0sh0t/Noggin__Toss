@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block head_title %}
+  noggintoss
+{% endblock head_title%}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div><div class='jumbotron shadow-lg p-3 bg-white rounded mt-5' style="width:100%">
+<h3 id="skyrocket" class='myDIV mt-5' style='color:#e6b800'>ＬＯＢＢＹ
+  <h6 style="color:#f26060" class="hide small">Share your Presence</h6>
+   </h3>
+
+  </div>
+  
+  {% if messages %}
+<center><div style='width:700px;color:#cca300' id="message_container" class="alert alert-outline-warning fade show" role="alert">
+<ul  class="messages">
+    {% for message in messages %}
+    <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+      <center>
+        <img src="/media/parking/globe.png" style="width:70px;height:70px"/>
+        {{ message }}</center>
+    </span>
+    </div>
+    {% endfor %}
+  </ul></center>
+{% endif %}
+  
+
+
+<br><br><br><center>
+<h6 style="color:#f26060">🇼🇭🇦🇹🇸 🇴🇳 🇾🇴🇺🇷 🇲🇮🇳🇩? </h6><center>
+  </div>
+  <div class="longFade rounded shadow-lg container bg-white col-md-8" id='tossiteh-feed' ></div>
+{% else %}
+<br><br><div style='background-image: url("/media/parking/redy.jpg");background-size: cover)'
+  class='authforms jumbotron shadow-lg bg-white rounded'>
+<center><h6 id="skyrocket" class='text-lg' style='color:white'>
+<img src='\media\parking\comet.png' style='width:70px;height:70px'/>
+    ＣＲＥＡＴＥ, ＡＮＤ ＬＥＴ ＯＴＨＥＲＳ ＲＥＡＣＨ  ＹＯＵＲ ＭＥＳＳＡＧＥ  
+  </h6></center>
+
+<center style='color: white' class='container'>
+<small> 
+  <br>
+    ＦＲＯＭ ＯＵＲ ＳＯＬＡＲ ＳＹＳＴＥＭ<br><br>
+  ＴＨＥ ＨＩＧＨＥＳＴ ＳＡＬＵＴＥＤ ＮＯＧＧＩＮＳ
+<img class="mt-2" style='width:120px;height:120px' src='\media\parking\float.png'/>
+    ＲＥＡＣＨ ＴＨＥ ＴＯＰ
+</small>
+</center>
+</div>
+<div class='globalFadeIn mt-5' id="tossiteh" data-can-noggin="false"></div>
+{% endif %}
+  
+<a class="mr-5 mb-5" href="#skyrocket"
+  style="text-decoration:none;color:grey;position:fixed;z-index:1000;bottom:0;right:0">UP</a>
+{% endblock content %}
+
+
+

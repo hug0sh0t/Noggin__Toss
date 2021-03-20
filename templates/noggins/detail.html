@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+ {% block head_title %}
+  Digital Information Gathering
+  {% endblock head_title%}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div><div class="authforms"><br><br><!--MEMBERS-->
+   <div><a style="border:none;padding:0;background:none;float:left"
+        class="btn btn-light btn-lg mt-5 ml-5 shadow-lg" href="../">
+    <img class='' style="width:25px;height:25px" src="/media/parking/anti.png"/>
+      <small class='mr-5 small'> Leave</small></a></div>
+
+<span style="border:none;padding:0;background:none;float:left"
+        class="btn btn-light btn-lg mt-5 shadow-lg">
+    <h5 class='container'>
+    <img src="/media/parking/team.png" style="width:50px;height:50px"/>
+      Views {{magni_nog.eyeball_count.count}} 
+    </h5></span>
+
+  </div>
+{% for noggin in noggins %}
+  {% if forloop.first %}
+    {% if request.user == noggin.user %}
+       <button onclick="popUp()" style="border:none;padding:0;background:none"
+        class=" btn btn-light btn-lg mt-5 shadow-lg">
+           <small class='ml-2'><small>Remove</small></small>
+      <img class='' style="width:30px;height:30px" src="/media/parking/ex.png"/></button>
+
+       <center><div id="popper"
+           data-toggle="popover"
+           data-trigger="focus"
+           style="background-color:#ffe6e6;color:#b50c00;display:none;z-index:1000;width:500px;height:300px;border-radius:50%;position:absolute"
+           class="mt-5 rmvButt popfade jumbotron shadow-lg rounded ml-5">
+           <br>  This is Permanent, and also note that 
+           <br>  Many May Benefit From Your Noggin
+           <br>to Proceed Please Press Confirm
+           <br><a style="text-decoration:none;border:none;outline;none" class="shadow-lg mt-2 btn btn-sm btn-outline-danger"
+             href="/{{noggin_id}}/blip/" >remove</a>
+         </div></center>
+   
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+
+
+
+  <center><div
+  class='tossiteh-detail mt-5 jumbotron container shadow p-5 mb-5 bg-white rounded'
+  data-noggin-id="{{ noggin_id }}"
+  data-class-name='col-20 mx-auto'></div></center>
+
+  <!--COMMENT CREATION-->
+    
+  </div>
+
+<center><div id="jumper" class="col-md-5 card bg-white">
+      <div class="card-body">
+       
+        <h6 style='float:left'>Share, Comment, Discuss</h6><br>
+        <form method="post" style="margin-top: 1.3em">
+          {% csrf_token %}
+          {{ comment_form.body | as_crispy_field }}
+          <button type="submit" class="btn btn-light btn-lg btn-block">ＳＨＡＲＥ</button>
+        </form>
+      </div>
+  </center>
+
+<center class='container jumbotron bg-white shadow-lg rounded'>
+  <h5 style="color:grey">Interactions
+  <img src="/media/parking/comment.png" style="width:70px;height:70px"/>
+  To The Top
+   </h5> 
+  </small>
+  <br><br>
+
+<!--MAIN COMMENT FEED-->
+
+{% for comment in comments %}
+<div class="{{comment.id}}" style="padding: 10px">
+  <p class="font-weight-bold">
+    <span>
+      
+
+    {% for noggin in noggins %}
+      
+  {% if request.user == comment.user or request.user == noggin.user %}
+
+        <button class="cmtDeleter myDIV mb-5 zoom"
+              style="background:none;border:none;padding:0;outline:none;float:right" 
+              data-cid={{comment.id}} data-href="blipcmt/{{comment.id}}">
+      <img style="width:15px;height:15px" src="/media/parking/noteh.png" />
+      </button>
+
+        {% endif %}
+    {% endfor %}
+ 
+    {% for p in profiles %}
+    {% if p.user == comment.user %}
+      <a class="myDIV small zoom" href='/profiles/{{ comment.user }}' 
+        style="float:left;color:#f26060;font-weight:bold; border:none;padding:0px;background:none;text-decoration:none">
+        <img class=" shadow-lg" src="/media/{{p.avatar}}"
+        style="width:70px;height:70px;border-radius:50%;float:left"/><br>
+        {{ comment.user }}</a>
+      {% endif %}
+    {% endfor %}
+
+
+
+      <small class="speech-bubble hide small" style="float:left;margin-left:100px;color:#f26060">
+        {{comment.user.first_name}} {{comment.user.last_name}}<br>
+      Joined <br>{{comment.user.date_joined | timesince}} ago
+      </small>
+      <h6 style="float:right">
+
+  {% if request.user in comment.commentlike.all %}
+  <button
+    style="color:#f26060;font-weight:bold;text-decoration:none;background:none;border:none;padding:0;box-shadow:none;outline:none" 
+    class="like-btn zoom btn-lg" 
+    data-cidpass="{{comment.id}}"
+    data-href="/api/{{noggin_id}}/{{comment.id}}/like/">
+    {{comment.commentlike.count}} 
+  </button>
+  <img style="width:30px;height:30px" src="/media/parking/yes.png" class="{{comment.id}}" />
+{% else %}
+  <button
+    style="color:#bfa904;text-decoration:none;background:none;border:none;padding:0;box-shadow:none;outline:none" 
+    class="like-btn zoom btn-lg" 
+    data-cidpass="{{comment.id}}"
+    data-href="/api/{{noggin_id}}/{{comment.id}}/like/">
+    {{comment.commentlike.count}} 
+  </button>
+  <img style="width:25px;height:25px" src="/media/parking/no.png" class="{{comment.id}}" />
+{% endif %}
+      </h6><br><br><br>
+      <div style="color:black;width:700px" class="container">{{ comment.body | linebreaks }}</div>
+    </span>
+  </p>
+  <small class="small"><small class="text-muted font-weight-normal small">
+      {{ comment.created_on }}<br>
+     
+      <hr></small></small>
+</div>
+
+      {% empty %}
+      <h6 style="color:grey">
+    <img style="width:70px;height:70px"
+    src='/media/parking/none.png'>None yet, be the first !
+    </h6>
+    </div>
+{% endfor %}
+{% endif %}
+  {% endblock content %}
