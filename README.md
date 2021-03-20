@@ -1,4 +1,4 @@
-# Noggin Toss <img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/toss.png"/>
+# Noggin Toss <img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/tossiteh/toss.png"/>
 <small style="color:#c8c8c8">
 A Social Status Update API I created with Full CRUD / User && Post Search / Authentication / Notification functionality 
 
@@ -11,4 +11,4 @@ Follow Other Creators , Customize Their Profiles, Create Multiple accounts / del
 Many of these views are Function Based, and are reusable for your software aswell 
 
  </small>
-<img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/truegif.gif"/>
+<img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/tossiteh/truegif.gif"/>
