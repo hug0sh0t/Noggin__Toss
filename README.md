@@ -8,7 +8,7 @@ This Software Gives any user the ability to create Posts(noggins)  with the usag
 Follow Other Creators , Customize Their Profiles, Create Multiple accounts / delete Accounts , and many more features    
 
 
-Many of these views are Function Based, and are reusable for your software aswell 
+I created this application using the traditional MVC pattern 
 
  </small>
 <img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/tossiteh/truegif.gif"/>
