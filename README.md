@@ -10,5 +10,9 @@ Follow Other Creators , Customize Their Profiles, Create Multiple accounts / del
 
 I created this application using the traditional MVC pattern 
 
+All the code in this repository was created by Seanchester Reyes Rosario
+
+All the code in this repository us licensed under Seanchester Reyes Rosario
+
  </small>
 <img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/tossiteh/truegif.gif"/>
