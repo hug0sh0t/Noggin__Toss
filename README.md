@@ -12,7 +12,7 @@ I created this application using the traditional MVC pattern
 
 All the code in this repository was created by Seanchester Reyes Rosario
 
-All the code in this repository us licensed under Seanchester Reyes Rosario
+All the code in this repository is licensed under Seanchester Reyes Rosario
 
  </small>
 <img src="https://github.com/hug0sh0t/Noggin__Toss/blob/master/tossiteh/truegif.gif"/>
